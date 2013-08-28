@@ -4,8 +4,9 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <style type="text/css">
-    #editor {
+    .aceable {
        height: 200px;
+       margin-bottom:10px;
     }
     </style>
     <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
@@ -17,28 +18,34 @@
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
 
-   <div id="editor">function foo(items) {
+   <div class="aceable" id="editor">function foo(items) {
        var x = "All this is syntax highlighted";
        return x;
    }</div>
+   <div class="aceable"> function foo(){}</div>
        
    <script>
-       var editor = ace.edit("editor");
        var socket = io.connect(window.location.origin);
-       editor.setTheme("ace/theme/monokai");
-       editor.getSession().setMode("ace/mode/javascript");
-       var session = editor.getSession();
-       var locked = false;
-       session.on('change', function(d,e,f) {
-          if (!locked) {
-            socket.emit('text-changed', session.getValue());
-          }
+       var locks = {};
+       var editors = {};
+       $('.aceable').each(function(k,v) {
+          var editor = ace.edit(v);
+          var session = editor.getSession();
+          editors[k] = {locked: false, session: session};
+          editor.setTheme("ace/theme/monokai");
+          session.setMode("ace/mode/javascript");
+          session.on('change', function(d,e,f) {
+             if (!editors[k].locked) {
+                socket.emit('text-changed', {id: k, value:session.getValue()});
+             }
+          });
        });
 
        socket.on('update-text', function(d) {
-          locked = true;
-          session.setValue(d);
-          locked = false;
+          var editor = editors[d.id];
+          editor.locked = true;
+          editor.session.setValue(d.value);
+          editor.locked = false;
        });
    </script>
   </body>
