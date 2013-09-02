@@ -1,6 +1,7 @@
 angular-fireace
 ===============
 __firebase + ace = fireace__
+
 use fireace to have collaborative editing that's as easy as using an html tag:
 
 ```
