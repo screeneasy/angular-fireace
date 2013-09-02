@@ -1,0 +1,25 @@
+<!html>
+<html>
+   <head>
+      <title>Firebase + angular + ace</title>
+      <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
+      <script src="bower_components/angular/angular.js"></script>
+      <script src="bower_components/ace-builds/src-min-noconflict/ace.js" data-ace-base="src" type="text/javascript" charset="utf-8"></script>
+      <script src="bower_components/angular-ui-ace/ui-ace.js"></script>
+      <script src="bower_components/angular-fire/angularFire.js"></script>
+      <script src="angular-fireace.js"></script>
+      <style type="text/css">
+      .ace_editor { height: 200px; }
+      </style>
+   </head>
+   <body>
+      <div ng-controller="test" ng-app="test">
+         <fireace firebaseurl="https://<your-project>.firebaseio.com/codecollab/1234"></fireace>
+      </div>
+      <script>
+         angular.module('test', ['fireace']).controller('test', ['$scope', function($scope, angularFire) {
+
+         }]);
+      </script>
+   </body>
+</html>

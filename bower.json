@@ -1,0 +1,10 @@
+{
+  "name": "fireace",
+  "version": "0.0.1",
+  "dependencies": {
+    "ace-builds": "1.1.x",
+    "angular": "1.0.8",
+    "angular-fire": "0.3.0",
+    "angular-ui-ace": "0.0.4"
+  }
+}
