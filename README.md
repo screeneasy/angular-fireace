@@ -17,6 +17,9 @@ angular.module('foo', ['fireace'])
 Dependencies
 ============
 [ace-ui](https://github.com/angular-ui/ui-ace)
+
 [ace-builds](https://github.com/ajaxorg/ace-builds/)
+
 [angularFire](https://github.com/firebase/angularFire)
+
 [angular](https://github.com/angular/angular.js)
